@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог товаров</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script defer src="js/bootstrap.bundle.min.js"></script>
+    <script defer src="js/main.js"></script>
+</head>
+
+<body>
+<div class="page">
+
+    <div class="container mt-4">
+
+        <div class="row">
+
+            <div class="content col-8">
+
+                <div class="content_header">
+
+                    <div class="h1 text-center">Каталог товаров</div>
+
+                </div>
+
+                <div class="searching row form-group mt-3 text-center">
+
+                    <div class="col-sm-12">
+                        <input class="form-control search_name" type="text" name="" id="search_name"
+                               placeholder="Живой поиск по названию">
+                    </div>
+
+                </div>
+
+                <div class="table-responsive">
+                    <table class="content_table table mt-3">
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="side_menu col-4">
+
+                <div class="control_buttons mb-2">
+                    <button type="button" class="button_add btn btn-secondary me-1 mb-2" data-bs-toggle="modal"
+                            data-bs-target="#addModal">
+                        Добавить товар
+                    </button>
+                    <button type="button" class="button_del btn btn-secondary mb-2" data-bs-toggle="modal"
+                            data-bs-target="#deleteModal">
+                        Удалить по цене
+                    </button>
+                </div>
+
+                <div class="filters mb-2">
+
+                    <div class="form-check sort">
+                        <input class="form-check-input" type="radio" name="filterRadio" value=""
+                               id="filter_sum">
+                        <label class="form-check-label" for="filter_sum">
+                            Сортировка по сумме
+                        </label>
+                    </div>
+
+                    <div class="form-check sort">
+                        <input class="form-check-input filter_area" type="radio" name="filterRadio" value=""
+                               id="filter_name">
+                        <label class="form-check-label" for="filter_name">
+                            Сортировка по имени
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="editing">
+                    <div class="edit mt-2">
+                        <label class="form-check-label mb-2" id="edit_element_label" for="edit_element">
+                            Введите код товара<br> для редактирования:
+                        </label>
+                        <input class="form-control edit_element" type="text" name="" id="edit_element"
+                               placeholder="Поиск по коду">
+                    </div>
+                </div>
+
+                <div class="excerpt_wrap">
+                    <div class="excerpt mt-2">
+                        <label class="form-check-label mb-2" id="excerpt_element_label" for="excerpt_element">
+                            Введите название товара<br> для получения справки:
+                        </label>
+                        <input class="form-control edit_element" type="text" name="" id="excerpt_element"
+                               placeholder="Название товара">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal modal_add" id="addModal" aria-labelledby="addModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="content_modal">
+
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="addModalLabel">Введите данные для нового товара:</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Название магазина:
+                            </div>
+                            <input type="text" class="form-control" id="modal_input_store_name">
+                            <div class="form-text text-muted">
+                                (Первая буква заглавная)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Адрес магазина:
+                            </div>
+                            <input type="text" class="form-control" id="modal_input_store_address">
+                            <div class="form-text text-muted">
+                                (Первая буква заглавная)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Артикул товара (уникальный):
+                            </div>
+                            <input type="number" class="form-control" id="modal_input_code">
+                            <div class="form-text text-muted">
+                                (Число > 0)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Название товара:
+                            </div>
+                            <input type="text" class="form-control" id="modal_input_name">
+                            <div class="form-text text-muted">
+                                (Первая буква заглавная)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Количество товара:
+                            </div>
+                            <input type="number" class="form-control" id="modal_input_quantity">
+                            <div class="form-text text-muted">
+                                (Число > 0)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Цена товара:
+                            </div>
+                            <input type="number" class="form-control" id="modal_input_price">
+                            <div class="form-text text-muted">
+                                (Число > 0, < 1000000)
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" id="modal_add_send">
+                                Добавить
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal_edit" id="editModal" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="content_modal">
+
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="editModalLabel">Отредактировать товар:</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Название магазина:
+                            </div>
+                            <input type="text" class="form-control" id="modal_input_store_name_edit">
+                            <div class="form-text text-muted">
+                                (Первая буква заглавная)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Адрес магазина:
+                            </div>
+                            <input type="text" class="form-control" id="modal_input_store_address_edit">
+                            <div class="form-text text-muted">
+                                (Первая буква заглавная)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Артикул товара (уникальный):
+                            </div>
+                            <input type="number" class="form-control" id="modal_input_code_edit">
+                            <div class="form-text text-muted">
+                                (Число > 0)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Название товара:
+                            </div>
+                            <input type="text" class="form-control" id="modal_input_name_edit">
+                            <div class="form-text text-muted">
+                                (Первая буква заглавная)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Количество товара:
+                            </div>
+                            <input type="number" class="form-control" id="modal_input_quantity_edit">
+                            <div class="form-text text-muted">
+                                (Число > 0)
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Цена товара:
+                            </div>
+                            <input type="number" class="form-control" id="modal_input_price_edit">
+                            <div class="form-text text-muted">
+                                (Число > 0)
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" id="modal_edit_send">
+                                Edit
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal_delete" id="deleteModal" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="content_modal">
+
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="deleteModalLabel">Удаление товаров по цене</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Введите цену удаляемых товаров:
+                            </div>
+                            <input type="number" class="form-control" id="modal_delete_input">
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" id="modal_delete_send">
+                            Удалить
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal_excerpt" id="excerptModal" aria-labelledby="excerptModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="content_modal">
+
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="excerptModalLabel">Выписка по товару</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Товар наиболее дешевый в магазине по адресу:
+                            </div>
+                            <div id="cheapest_address">
+
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-label">
+                                Суммарная стоимость товара в магазинах:
+                            </div>
+                            <div id="sum_price">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+</html>
